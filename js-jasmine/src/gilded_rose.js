@@ -17,18 +17,18 @@ class Shop {
       //normal items with > 0 quality
       if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'tickets') {
         if (this.items[i].quality > 0) {
-          if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
+          if (this.items[i].name != 'Sulfuras') {
             this.items[i].quality = this.items[i].quality - 1;
           }
         }
       //
       } else {
-        //
+        //other items with quality less than 50
         if (this.items[i].quality < 50) {
           this.items[i].quality = this.items[i].quality + 1;
         //
 
-        //
+        //tickets with between 6 and 10 sellIn
           if (this.items[i].name == 'tickets') {
             if (this.items[i].sellIn < 11) {
               if (this.items[i].quality < 50) {
@@ -37,24 +37,24 @@ class Shop {
             }
         //
 
-        //
+        //tickets with between 1 and 5 sellIn
             if (this.items[i].sellIn < 6) {
               if (this.items[i].quality < 50) {
                 this.items[i].quality = this.items[i].quality + 1;
               }
             }
-        //
+
           }
         }
       }
-      if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
+      if (this.items[i].name != 'Sulfuras') {
         this.items[i].sellIn = this.items[i].sellIn - 1;
       }
       if (this.items[i].sellIn < 0) {
         if (this.items[i].name != 'Aged Brie') {
           if (this.items[i].name != 'tickets') {
             if (this.items[i].quality > 0) {
-              if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
+              if (this.items[i].name != 'Sulfuras') {
                 this.items[i].quality = this.items[i].quality - 1;
               }
             }

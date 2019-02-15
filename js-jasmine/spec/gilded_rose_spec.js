@@ -27,6 +27,13 @@ describe("Normal Items", function() {
     rose.updateQuality();
     expect(items[0].quality).toEqual(2)
   });
+
+  it("Subtracts 1 from sellIn for normal item", function() {
+    items = [ new Item("foo", 2, 5)];
+    rose = new Shop(items);
+    rose.updateQuality();
+    expect(items[0].sellIn).toEqual(1)
+  });
 });
 
 describe("Aged Brie", function() {
@@ -46,15 +53,22 @@ describe("Aged Brie", function() {
   })
 
   it("Aged Brie does not increase in quality when quality is already at the threshold of 50", () => {
-    var item = [new Item("Aged Brie", 0, 49)]
+    var item = [new Item("Aged Brie", 0, 50)]
     var gildedRose = new Shop(item);
     var items = gildedRose.updateQuality();
     expect(items[0].quality).toEqual(50)
   })
+
+  it("Subtracts 1 from sellIn for Aged Brie", function() {
+    items = [ new Item("Aged Brie", 2, 5)];
+    rose = new Shop(items);
+    rose.updateQuality();
+    expect(items[0].sellIn).toEqual(1)
+  });
 });
 
 describe('Tickets', () => {
-  
+
   it("tickets quality goes to 0 when SellIn equals 0", () => {
     var item = [new Item("tickets", 0, 100)]
     var gildedRose = new Shop(item);
