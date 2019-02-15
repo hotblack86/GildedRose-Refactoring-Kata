@@ -30,6 +30,13 @@ describe("Normal Items", function() {
     expect(items[0].quality).toEqual(2)
   });
 
+  test("Quality doesn't decrease if sellIn and quality is negative", function() {
+    var item = [ new Item("foo", -4, -4)];
+    var gildedRose = new Shop(item);
+    var items = gildedRose.updateQuality();
+    expect(items[0].quality).toEqual(-4)
+  });
+
   test("SellIn decreases by 1", function() {
     var item = [ new Item("foo", 2, 5)];
     var gildedRose = new Shop(item);
@@ -39,6 +46,12 @@ describe("Normal Items", function() {
 });
 
 describe("Aged Brie", function() {
+
+  test("Should return item name", function() {
+    var gildedRose = new Shop([ new Item("Aged Brie", 0, 0) ]);
+    var items = gildedRose.updateQuality();
+    expect(items[0].name).toEqual("Aged Brie");
+  });
 
   test("Quality increases by 1", function() {
     var item = [ new Item("Aged Brie", 5, 4)];
@@ -70,6 +83,12 @@ describe("Aged Brie", function() {
 });
 
 describe('Tickets', function() {
+
+  test("Should return item name", function() {
+    var gildedRose = new Shop([ new Item("tickets", 0, 0) ]);
+    var items = gildedRose.updateQuality();
+    expect(items[0].name).toEqual("tickets");
+  });
 
   test("Quality goes to 0 when SellIn equals 0", function() {
     var item = [new Item("tickets", 0, 100)]
@@ -115,11 +134,18 @@ describe('Tickets', function() {
 })
 
 describe('Sulfuras', function() {
-  test("Never has to be sold or decreases in Quality", function() {
+  test("Never decreases in Quality", function() {
     var item = [ new Item("Sulfuras", 2, 5)];
     var gildedRose = new Shop(item);
     var items = gildedRose.updateQuality();
     expect(items[0].quality).toEqual(5)
+  });
+
+  test("Never has to be sold", function() {
+    var item = [ new Item("Sulfuras", 2, 5)];
+    var gildedRose = new Shop(item);
+    var items = gildedRose.updateQuality();
+    expect(items[0].sellIn).toEqual(2)
   });
 });
 
